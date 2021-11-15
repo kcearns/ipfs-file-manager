@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kcearns/ipfs-file-manager#readme",
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
