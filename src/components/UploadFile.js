@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
+import { ethers } from 'ethers'
+import Web3Model from 'web3modal'
+
+import { contractAddress } from '../utils/constants'
+
+import IPFSFileStorage from '../../artifacts/contracts/IPFSFileStorage.sol/IPFSFileStorage.json'
 
 const ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
@@ -17,6 +23,19 @@ const UploadFile = () => {
             console.log('File upload failed', error)
         }
     }
+
+    const uploadToContract = async () => {
+        const web3Modal = new Web3Model()
+        const connection = await web3Modal.connect()
+        const provider = new ethers.providers.Web3Provider(connection)
+        const signer = provider.getSigner()
+
+        let contract = new ethers.Contract(contractAddress, IPFSFileStorage.abi, signer )
+        let transaction = await contract.upload(fileUrl)
+        let tx = await transaction.wait()
+        console.log(tx)
+    }
+
     return (
         <>
 
@@ -42,6 +61,11 @@ const UploadFile = () => {
 
 
             <div>
+                <button 
+                    onClick={uploadToContract}
+                >
+                    Create contract txn    
+                </button>
             {
                 fileUrl && (
                     <>
