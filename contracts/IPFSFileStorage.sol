@@ -5,13 +5,19 @@ import "hardhat/console.sol";
 
 contract IPFSFileStorage {
 
-    mapping(address => string) public uploadedFiles;
-
-    event Upload(address sender, string url);
-
-    function upload(string memory url) public {
-        console.log(msg.sender, url);
-        emit Upload(msg.sender, url);
-        uploadedFiles[msg.sender] = url;
+    struct UploadedFile {
+        address owner;
+        string url;
     }
+
+    UploadedFile[] private UploadedFiles;
+
+    function setUploadedFiles(string memory _url) public {
+        UploadedFiles.push(UploadedFile(msg.sender, _url));
+    }
+
+    function getUploadedFiles() public view returns (UploadedFile[] memory) {
+        return UploadedFiles;
+    }
+    
 }
