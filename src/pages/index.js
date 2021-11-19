@@ -59,7 +59,7 @@ const Index = () => {
     return (
         <>
         <Header currentAccount={currentAccount} />
-        <div className="flex h-screen justify-center items-center">
+        <div className="container mx-auto">
             <div>
                 {
                     currentAccount && (

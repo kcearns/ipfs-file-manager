@@ -8,8 +8,8 @@ import IPFSFileStorage from '../../artifacts/contracts/IPFSFileStorage.sol/IPFSF
 const FileList = () => {
     const [array, setArray] = useState([])
 
-    useEffect(() => {
-      const fetchUrls = async () => {
+    const fetchUrls = async () => {
+      try {
         const web3Modal = new Web3Modal()
         const connection = await web3Modal.connect()
         const provider = new ethers.providers.Web3Provider(connection)
@@ -19,7 +19,22 @@ const FileList = () => {
         const data = await contract.getUploadedFiles()
         setArray(data)
         console.log(data)
+
+        contract.on("NewUpload", (owner, url) => {
+          console.log("NewUpload", owner, url);
+
+          setArray(prevState => [{
+            owner: owner,
+            url: url,
+          }, ...prevState]);
+        });
+
+      } catch (error) {
+        console.log(error)
       }
+    }
+
+    useEffect(() => {
       fetchUrls()
     }, [])
 
