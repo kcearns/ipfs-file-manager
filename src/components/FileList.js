@@ -18,11 +18,8 @@ const FileList = () => {
         let contract = new ethers.Contract(contractAddress, IPFSFileStorage.abi, signer )
         const data = await contract.getUploadedFiles()
         setArray(data)
-        console.log(data)
 
         contract.on("NewUpload", (owner, url) => {
-          console.log("NewUpload", owner, url);
-
           setArray(prevState => [{
             owner: owner,
             url: url,

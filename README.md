@@ -1,15 +1,13 @@
-# Basic Sample Hardhat Project
+# IPFS File Manager Example
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+This project demonstrates a very simple IPFS file uploader that saves the URL and wallet address to an array in a smart contract.
 
-Try running some of the following tasks:
+To run this example locally:
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
+```
+- Rename .env.example to .env and update it with your project ID and key
+- Start hardhat node: npx hardhat node
+- Deploy contract: npx hardhat run --network localhost scripts/deploy.js
+- Update src/utils/constants.js with the contract address output from the run command
+- Start application: yarn dev
 ```

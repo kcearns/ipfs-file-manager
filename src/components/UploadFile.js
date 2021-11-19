@@ -17,7 +17,6 @@ const UploadFile = () => {
         try {
             const uploadedFile = await ipfsClient.add(file)
             const url = `https://ipfs.infura.io/ipfs/${uploadedFile.path}`
-            console.log(`File uploaded successfully to ${url}`)
             setFileUrl(url)
         } catch (error) {
             console.log('File upload failed', error)
@@ -33,13 +32,12 @@ const UploadFile = () => {
         let contract = new ethers.Contract(contractAddress, IPFSFileStorage.abi, signer )
         let transaction = await contract.setUploadedFiles(fileUrl)
         let tx = await transaction.wait()
-        console.log(tx)
         setFileUrl(null)
     }
 
     return (
         <>
-        <div className="my-10">
+        <div className="my-7">
             { !fileUrl && (
                 <>
                     <div className="flex p-2">

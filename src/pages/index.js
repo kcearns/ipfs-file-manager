@@ -37,8 +37,6 @@ const Index = () => {
             const accounts = await ethereum.request({
                 method: 'eth_requestAccounts'
             })
-
-            console.log('Connected:', accounts[0] )
             setCurrentAccount(accounts[0])
 
         } catch (error) {
@@ -55,6 +53,9 @@ const Index = () => {
         <>
         <Header currentAccount={currentAccount} connectWallet={connectWallet} />
         <div className="container mx-auto">
+            <div className="p-4 text-lg text-gray-600">
+                Files are uploaded to IPFS. The URL and wallet address (owner) are saved to a smart contract array.
+            </div>
             <div>
                 {
                     currentAccount && (
