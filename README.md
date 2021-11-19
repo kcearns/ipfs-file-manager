@@ -6,6 +6,7 @@ To run this example locally:
 
 ```
 - Rename .env.example to .env and update it with your project ID and key
+- Run: yarn install
 - Start hardhat node: npx hardhat node
 - Deploy contract: npx hardhat run --network localhost scripts/deploy.js
 - Update src/utils/constants.js with the contract address output from the run command
