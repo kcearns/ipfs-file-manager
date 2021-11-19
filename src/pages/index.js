@@ -3,7 +3,6 @@ import UploadFile from '../components/UploadFile'
 import Header from '../components/Header'
 import FileList from '../components/FileList'
 import { Dialog, Transition } from '@headlessui/react'
-import { ethers } from 'ethers'
 
 const Index = () => {
     const [currentAccount, setCurrentAccount] = useState(null)
@@ -11,10 +10,6 @@ const Index = () => {
 
     const closeModal = () => {
         setIsOpen(false)
-    }
-
-    const openModal = () => {
-        setIsOpen(true)
     }
 
     const checkIfWalletIsConnected = async () => {
@@ -58,7 +53,7 @@ const Index = () => {
 
     return (
         <>
-        <Header currentAccount={currentAccount} />
+        <Header currentAccount={currentAccount} connectWallet={connectWallet} />
         <div className="container mx-auto">
             <div>
                 {
@@ -70,16 +65,6 @@ const Index = () => {
                     )
                 }
             </div>
-            {
-                !currentAccount && (
-                    <button
-                    className="bg-blue-400 rounded-lg text-white p-4 font-bold"
-                    onClick={connectWallet}
-                >
-                    Connect Your Wallet
-                </button>
-                )
-            }
         </div>
 
         <Transition appear show={isOpen} as={Fragment}>
@@ -126,14 +111,14 @@ const Index = () => {
                     </Dialog.Title>
                     <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                        This site is for testing only. Do not upload data you cannot afford to lose.
+                        This site is for testing only. Do not upload files you want to keep.
                     </p>
                     </div>
 
                     <div className="mt-4">
                     <button
                         type="button"
-                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                         onClick={closeModal}
                     >
                         I agree, let me in!
